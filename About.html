@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About Me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap + FontAwesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --text-color: #2d3748;
+      --accent-color: #4a6cf7;
+      --accent-light: #6a88ff;
+      --secondary-color: #718096;
+      --card-bg: #ffffff;
+      --table-header: #edf2f7;
+      --border-color: #e2e8f0;
+      --success-color: #48bb78;
+      --warning-color: #ecc94b;
+      --gradient-start: #4a6cf7;
+      --gradient-end: #6a88ff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark-mode {
+      --bg-color: #121826;
+      --text-color: #e2e8f0;
+      --accent-color: #6a88ff;
+      --accent-light: #8ba2ff;
+      --secondary-color: #a0aec0;
+      --card-bg: #1e293b;
+      --table-header: #2d3748;
+      --border-color: #374151;
+      --success-color: #68d391;
+      --warning-color: #f6e05e;
+      --gradient-start: #6a88ff;
+      --gradient-end: #8ba2ff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      padding-top: 80px;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--card-bg);
+      padding: 1.5rem 1rem;
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+      margin: 0;
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    header p {
+      color: var(--secondary-color);
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    nav a:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .top-controls {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .toggle-btn, select {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      box-shadow: var(--shadow);
+    }
+    
+    select { 
+      appearance: none; 
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      background-size: 16px;
+      padding-right: 2.5rem;
+    }
+    
+    .toggle-btn:hover, select:hover { 
+      background: var(--accent-color);
+      color: white;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 6rem auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .profile-card {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform 0.3s;
+      margin-bottom: 2rem;
+    }
+    
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .profile-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 4px solid var(--accent-color);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card h2 {
+      color: var(--text-color);
+      margin: 0.5rem 0;
+      font-size: 1.8rem;
+    }
+
+    .profile-card p {
+      line-height: 1.7;
+      color: var(--secondary-color);
+      font-size: 1.1rem;
+      margin: 1.5rem 0;
+    }
+
+    .highlight {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .media {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .media h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+      font-size: 1.5rem;
+    }
+
+    .media ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .media a {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--bg-color);
+    }
+    
+    .media a:hover {
+      transform: translateY(-5px);
+      color: white;
+      background: var(--accent-color);
+      box-shadow: var(--shadow-hover);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      background: var(--card-bg);
+      color: var(--secondary-color);
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 120px;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+      
+      header h1 { 
+        font-size: 1.8rem; 
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav { 
+        gap: 0.5rem; 
+      }
+      
+      nav a { 
+        padding: 0.5rem 1rem; 
+        font-size: 0.9rem; 
+      }
+      
+      .top-controls {
+        position: static;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+      
+      .profile-card {
+        padding: 1.5rem;
+      }
+      
+      .profile-card img {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .media ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .media a {
+        font-size: 1.8rem;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      body {
+        padding-top: 140px;
+      }
+      
+      header h1 { 
+        font-size: 1.6rem; 
+      }
+      
+      nav { 
+        flex-direction: column; 
+        align-items: center; 
+        width: 100%;
+      }
+      
+      nav a { 
+        width: 100%; 
+        text-align: center; 
+        justify-content: center;
+      }
+      
+      .top-controls {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .toggle-btn, select {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .profile-card {
+        padding: 1.25rem;
+      }
+      
+      .profile-card h2 {
+        font-size: 1.5rem;
+      }
+      
+      .profile-card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+   <header>
+    <h1 data-i18n="title">About Me</h1>
+    <p>Mohamed Adnane</p>
+    <nav>
+      <a href="index.html"><i class="fa fa-home"></i> <span data-i18n="home">Home</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-card">
+      <img src="./pic.jpg" alt="Profile Photo">
+      <h2 data-i18n="studentTitle">USTHB Student</h2>
+      <p data-i18n="bioText">
+        I am an <span class="highlight">Algerian student</span> at 
+        <span class="highlight">USTHB University</span>.  
+        My goal is to support <span class="highlight">L1 Mathematics</span> and 
+        <span class="highlight">Computer Science</span> students by creating helpful resources.  
+      </p>
+
+      <div class="media">
+        <h2 data-i18n="connectTitle">Connect with Me</h2>
+        <ul>
+          <li><a href="https://www.instagram.com/madnanem/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="mailto:saadnane859@gmail.com"><i class="fa fa-envelope"></i></a></li>
+          <li><a href="https://www.twitter.com/mAdnanem/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Mohamed Adnane — USTHB L1 MI</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

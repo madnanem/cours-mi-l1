@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Math Info L1 Courses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap + FontAwesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --text-color: #2d3748;
+      --accent-color: #4a6cf7;
+      --accent-light: #6a88ff;
+      --secondary-color: #718096;
+      --card-bg: #ffffff;
+      --table-header: #edf2f7;
+      --border-color: #e2e8f0;
+      --success-color: #48bb78;
+      --warning-color: #ecc94b;
+      --gradient-start: #4a6cf7;
+      --gradient-end: #6a88ff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark-mode {
+      --bg-color: #121826;
+      --text-color: #e2e8f0;
+      --accent-color: #6a88ff;
+      --accent-light: #8ba2ff;
+      --secondary-color: #a0aec0;
+      --card-bg: #1e293b;
+      --table-header: #2d3748;
+      --border-color: #374151;
+      --success-color: #68d391;
+      --warning-color: #f6e05e;
+      --gradient-start: #6a88ff;
+      --gradient-end: #8ba2ff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      padding-top: 80px;
+    }
+
+     header {
+      background: var(--card-bg);
+      padding: 1.5rem 1rem;
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+      margin: 0;
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    header p {
+      color: var(--secondary-color);
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    nav a:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+     .top-controls {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .toggle-btn, select {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      box-shadow: var(--shadow);
+    }
+    
+    select { 
+      appearance: none; 
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      background-size: 16px;
+      padding-right: 2.5rem;
+    }
+    
+    .toggle-btn:hover, select:hover { 
+      background: var(--accent-color);
+      color: white;
+    }
+
+     main {
+      max-width: 1200px;
+      margin: 6rem auto 2rem;
+      padding: 0 1rem;
+    }
+    
+    main h2 {
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+     .table-responsive {
+      margin-top: 1.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      box-shadow: var(--shadow);
+      background: var(--card-bg);
+      margin-bottom: 2rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    
+    table th, table td {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    
+    table th {
+      background: var(--table-header);
+      color: var(--text-color);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    table tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    
+    body.dark-mode table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    table td a {
+      color: var(--accent-color);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: block;
+      padding: 0.5rem;
+      border-radius: 6px;
+    }
+    
+    table td a:hover { 
+      background: var(--accent-color);
+      color: white;
+    }
+
+
+    section {
+      background: var(--card-bg);
+      margin: 2rem 0;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+      scrollbar-width: 5rem;
+      scroll-margin-top: 5rem;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    section h2 {
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    ul { 
+      list-style-type: none; 
+      padding: 0; 
+      margin: 0;
+    }
+    
+    ul li {
+      margin-bottom: 0.8rem;
+      background: var(--bg-color);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    ul li:hover { 
+      background: var(--table-header);
+      transform: translateX(5px);
+    }
+    
+    ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-grow: 1;
+      transition: color 0.2s;
+    }
+    
+    ul li a:hover { 
+      color: var(--accent-color);
+    }
+    
+    .solution-link {
+      padding: 0.4rem 0.8rem;
+      background: var(--success-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 500;
+    }
+    
+    .solution-link:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    .multi-solutions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    
+    .note {
+      background: var(--table-header);
+      color: var(--text-color);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .chapter-badge, .course-badge, .part-badge, .resource-number, .subject-badge, .tp-badge {
+      background: var(--accent-color);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .chapter-title, .resource-title {
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      background: var(--card-bg);
+      color: var(--secondary-color);
+      border-top: 1px solid var(--border-color);
+    }
+
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 992px) {
+      header h1 { font-size: 2rem; }
+      section { padding: 1.5rem; }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-top: 120px;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+      
+      header h1 { 
+        font-size: 1.8rem; 
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav { 
+        gap: 0.5rem; 
+      }
+      
+      nav a { 
+        padding: 0.5rem 1rem; 
+        font-size: 0.9rem; 
+      }
+      
+      .top-controls {
+        position: static;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+      
+      section h2 { 
+        font-size: 1.4rem; 
+      }
+      
+      section {
+        padding: 1.25rem;
+      }
+      
+      ul li {
+        padding: 0.8rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      body {
+        padding-top: 140px;
+      }
+      
+      header h1 { 
+        font-size: 1.6rem; 
+      }
+      
+      nav { 
+        flex-direction: column; 
+        align-items: center; 
+        width: 100%;
+      }
+      
+      nav a { 
+        width: 100%; 
+        text-align: center; 
+        justify-content: center;
+      }
+      
+      .top-controls {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .toggle-btn, select {
+        width: 100%;
+        text-align: center;
+      }
+      
+      section {
+        padding: 1rem;
+      }
+      
+      ul li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .solution-link {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        align-self: flex-start;
+      }
+      
+      .multi-solutions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="top-controls">
+    <select id="languageSwitcher" onchange="changeLanguage(this.value)">
+      <option value="en">🇬🇧 EN</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="ar">🇩🇿 AR</option>
+    </select>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  </div>
+
+
+  <header>
+    <h1 data-i18n="title">📘 Math Info L1 Courses</h1>
+    <p data-i18n="subtitle">Welcome dear students in Mathematics and Computer Science</p>
+    <nav>
+      <a href="About.html"><i class="fa fa-user"></i> <span data-i18n="about">About</span></a>
+    </nav>
+  </header>
+
+   <main>
+    <h2 data-i18n="modulesTable">📑 Table of Modules</h2>
+    <!-- Responsive table wrapper -->
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th data-i18n="modulesS1">MODULES S1</th>
+          <th data-i18n="coefficients">COEFFICIENTS</th>
+          <th data-i18n="modulesS2">MODULES S2</th>
+          <th data-i18n="coefficients">COEFFICIENTS</th>
+        </tr>
+        <tr><td><a href="#algorithme" data-i18n="algo1">ALGORITHME1</a></td><td>4</td><td><a href="#algorithme" data-i18n="algo2">ALGORITHME2</a></td><td>3</td></tr>
+        <tr><td><a href="#analyse" data-i18n="analyse1">ANALYSE1</a></td><td>4</td><td><a href="#analyse" data-i18n="analyse2">ANALYSE2</a></td><td>2</td></tr>
+        <tr><td><a href="#algebre" data-i18n="algebre1">ALGEBRE1</a></td><td>2</td><td><a href="#algebre" data-i18n="algebre2">ALGEBRE2</a></td><td>2</td></tr>
+        <tr><td><a href="#strm" data-i18n="strm1">STRM1</a></td><td>2</td><td><a href="#strm" data-i18n="strm2">STRM2</a></td><td>2</td></tr>
+        <tr><td><a href="#physique" data-i18n="physique1">PHYSIQUE1</a></td><td>2</td><td><a href="#physique" data-i18n="physique2">PHYSIQUE2</a></td><td>2</td></tr>
+        <tr><td><a href="#le" data-i18n="le">LE</a></td><td>1</td><td><a href="#opm" data-i18n="opm">OPM</a></td><td>1</td></tr>
+        <tr><td><a href="#bureautique" data-i18n="bureautique">BUREAUTIQUE</a></td><td>1</td><td><a href="#stat" data-i18n="probaStat">PROBA/STAT</a></td><td>1</td></tr>
+        <tr><td><a href="#tce" data-i18n="tce">TCE</a></td><td>1</td><td><a href="#histoire" data-i18n="histoireMath">HISTOIRE DE MATH</a></td><td>1</td></tr>
+        <tr><td></td><td></td><td><a href="#tic" data-i18n="tic">TIC</a></td><td>2</td></tr>
+      </table>
+    </div>
+
+
+    <section id="algorithme">
+      <h2><i class="fa fa-project-diagram"></i> <span data-i18n="algorithme">ALGORITHME</span></h2>
+      <ul>
+        <li>
+          <a href="ALGO2/ALGO L1-20220806T134101Z-001.zip" target="_blank">
+            <i class="fa fa-download"></i> <span data-i18n="algoCourse">COURS ALGORITHME1&2 PROF BESSAA -USTHB mode PDF&PPSX</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO1-2022-TD1.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 1
+          </a>
+          <a href="ALGO2/SOLUTION SERIE1.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO1-2022-TD2.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 2
+          </a>
+          <a href="ALGO2/SOLUTION SERIE2.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO1-2022-TD3.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 3
+          </a>
+          <a href="ALGO2/SOLUTION SERIE3.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO2-2022-TD4.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 4
+          </a>
+          <a href="ALGO2/SOLUTION SERIE4.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO2-2022-TD5.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 5
+          </a>
+          <a href="ALGO2/SOLUTION SERIE5.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/ALGO2-2022-TD6.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 6
+          </a>
+          <a href="ALGO2/SOLUTION SERIE6.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/BOOK.EXERCICE.BESSAA.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="algoBook">EXERCISES BOOK OF PROF BESSAA -USTHB mode PDF</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/tp/Commencer_avec_Language_C.pdf" target="_blank">
+            <i class="fa fa-laptop"></i> <span data-i18n="tpProgramming1">TP - PROGRAMMING BASES 1</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/tp/Poly_UEL_RAN_Informatique.pdf" target="_blank">
+            <i class="fa fa-laptop"></i> <span data-i18n="tpProgramming2">TP - PROGRAMMING BASES 2</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/tp/DevCpp.pdf" target="_blank">
+            <i class="fa fa-download"></i> <span data-i18n="installDevCpp">HOW TO INSTALL DEV-C++</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGO2/Algo (1).pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="examS2WithSolution">SUJETS S2 AVEC SOLUTION (usthb)</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="algoNote">All resources are provided by Prof. Bessaa - USTHB for educational purposes.</span>
+      </div>
+    </section>
+
+
+    <section id="analyse">
+      <h2><i class="fa fa-calculator"></i> <span data-i18n="analyse">ANALYSE</span></h2>
+      <ul>
+        <li>
+          <a href="ANALYSE/chapitre1 nombres réels Analyse1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="chapter-title" data-i18n="chapter1">CHAPITRE 1:</span> <span data-i18n="realNumbers">Nombres réels</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/TD1 analyse1 nombres réels.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 1
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/chapitre2 suites réelles analyse1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="chapter-title" data-i18n="chapter2">CHAPITRE 2:</span> <span data-i18n="realSequences">Suites réelles</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/TD2 analyse1  suites réelles.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 2
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/chapitre3 analyse1 fonctions analyse1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="chapter-title" data-i18n="chapter3">CHAPITRE 3:</span> <span data-i18n="functions">Fonctions</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/TD3 analyse2 fonctions.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 3
+          </a>
+          <a href="ANALYSE/Corrigé TD3 fonctions.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/Examen  Analyse1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="analysisExam">SUJET D'EXAMEN ANALYSE 1 (avec solution)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/chapitre4 Intégrales&Primitives analyse2.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="chapter-title" data-i18n="chapter4">CHAPITRE 4:</span> <span data-i18n="integrals">Intégrales</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/TD4 analyse2 Intégrales.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 4
+          </a>
+          <a href="ANALYSE/Corrigé TD5 Intégrales.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/chapitre5 analyse2 edo analyse2.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="chapter-title" data-i18n="chapter5">CHAPITRE 5:</span> <span data-i18n="edo">EDO</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/Fiche DL.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="dlSummary">RESUME COURS DL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/TD analyse2 dl.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieDL">SERIE TD DL</span>
+          </a>
+          <a href="ANALYSE/Corrigé TD4 DL  Analyse2.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/exercices corriges nombres reells.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="exercisesRealNumbers">Exercices corrigés: Nombres réels</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/exercices corriges suites reelles.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="exercisesRealSequences">Exercices corrigés: Suites réelles</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/exercices corriges limites continuite derivabilite.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="exercisesLimits">Exercices corrigés: Limites, continuité, dérivabilité</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/exercices corriges formule de taylor lagrange.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="exercisesTaylor">Exercices corrigés: Formule de Taylor-Lagrange</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/exercices corriges dl.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="exercisesDL">Exercices corrigés: DL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ANALYSE/livre analyse1.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="analysisBook">ANALYSE BOOK</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="analyseNote">Comprehensive collection of mathematical analysis resources including chapters, exercises, and solutions.</span>
+      </div>
+    </section>
+
+
+    <section id="algebre">
+      <h2><i class="fa fa-superscript"></i> <span data-i18n="algebre">ALGEBRE</span></h2>
+      <ul>
+        <li>
+          <a href="ALGEBRE/ALGEBRE1.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="courseS1">📘 COURS S1</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/ALGEBRE2.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="courseS2">📘 COURS S2</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série 1 (Logique-Ensemble-Applications-Relations binaires).pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 1 <span data-i18n="logicSets">(Logique-Ensemble-Applications-Relations binaires)</span>
+          </a>
+          <div class="multi-solutions">
+            <a href="ALGEBRE/corrige série 1  exo 7 to 13.pdf" class="solution-link" target="_blank">
+              <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span> (exo 7 to 13)
+            </a>
+            <a href="ALGEBRE/corrigé série 1 exo 17 to 23.pdf" class="solution-link" target="_blank">
+              <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span> (exo 17 to 23)
+            </a>
+          </div>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série 2 (Relations binaires).pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 2 <span data-i18n="binaryRelations">(Relations binaires)</span>
+          </a>
+          <a href="ALGEBRE/corrigé série 2 Relations binaires.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série 3 (groupes, anneaux et corps).pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 3 <span data-i18n="groupsRings">(Groupes, anneaux et corps)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série 4 (Espaces Vectoriels ).pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 4 <span data-i18n="vectorSpaces">(Espaces Vectoriels)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série 5 (matrices).pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="serieTD">SERIE TD</span> 5 <span data-i18n="matrices">(Matrices)</span>
+          </a>
+          <a href="ALGEBRE/corrigé serie 5.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série Applications linéaires.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="linearApplications">Série Applications linéaires avec solution</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/serie Systèmes linéaires.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="linearSystems">Série Systèmes linéaires avec solution</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/série  Matrices.pdf" target="_blank">
+            <i class="fa fa-file-pdf"></i> <span data-i18n="matricesSeries">Série Matrices avec solution</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/ALGEBRA BOOK.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span data-i18n="algebraBook">📘 ALGEBRA BOOK</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/Examen Alg1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="examS1Subject1">SUJET1 EXAMEN S1</span>
+          </a>
+          <a href="ALGEBRE/corrections de l'examen algebre1 2021.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/examen s1.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="examS1Subject2">SUJET2 EXAMEN S1</span>
+          </a>
+          <a href="ALGEBRE/Corrigé examen s1.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ALGEBRE/Exo.Corriges.Mars.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span data-i18n="algebraExercises">EXO's ALGEBRE AVEC SOLUTION</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="algebreNote">Comprehensive collection of algebra resources including courses, exercises, and solutions.</span>
+      </div>
+    </section>
+
+
+    <section id="strm">
+      <h2><i class="fa fa-cube"></i> STRM</h2>
+      <ul>
+        <li><a href="pdf/STRM/Cours/STRM1.pdf" target="_blank"><i class="fa fa-book"></i> <span data-i18n="courseSTRM1">Cours STRM 1</span></a></li>
+        <li><a href="pdf/STRM/Cours/STRM2.pdf" target="_blank"><i class="fa fa-book"></i> <span data-i18n="courseSTRM2">Cours STRM 2</span></a></li>
+      </ul>
+    </section>
+
+
+    <section id="physique">
+      <h2><i class="fa fa-atom"></i> <span data-i18n="physique">PHYSIQUE</span></h2>
+      <ul>
+        <li>
+          <a href="physique/Rappels mathématiques.pdf" target="_blank">
+            <i class="fa fa-calculator"></i> <span class="resource-title" data-i18n="mathReview">RAPPELS MATHÉMATIQUES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Cinématique - Partie I.pdf" target="_blank">
+            <span class="chapter-badge">CH1</span>
+            <i class="fa fa-running"></i> <span class="resource-title" data-i18n="kinematics">CINÉMATIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Résumé 1-Cinématique.PDF" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="kinematicsSummary">RÉSUMÉ 1 - CINÉMATIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/TD vecteurs 2021-2022.doc" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD0">SÉRIE TD0 - CINÉMATIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Série 1 - Cinématique du point matériel-Nouvelle version.pdf" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD1">SÉRIE TD1 - CINÉMATIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Cours Dynamique - Partie 1.PDF" target="_blank">
+            <span class="chapter-badge">CH2</span>
+            <i class="fa fa-weight"></i> <span class="resource-title" data-i18n="dynamicsPart1">DYNAMIQUE (PARTIE 1)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Cours Dynamique - Partie 2.PDF" target="_blank">
+            <span class="chapter-badge">CH2</span>
+            <i class="fa fa-weight"></i> <span class="resource-title" data-i18n="dynamicsPart2">DYNAMIQUE (PARTIE 2)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/physique Série2-Dynamique du point matériel-20202021.pdf" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD2">SÉRIE TD2 - DYNAMIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Cours Travail et Energie.pdf" target="_blank">
+            <span class="chapter-badge">CH3</span>
+            <i class="fa fa-bolt"></i> <span class="resource-title" data-i18n="workEnergy">TRAVAIL ET ÉNERGIE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Cours Travail & Energie - Résumé.PDF" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="workEnergySummary">TRAVAIL ET ÉNERGIE (RÉSUMÉ)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="physique/Série3-Travail et Energie.pdf" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD3">SÉRIE TD3 - TRAVAIL ET ÉNERGIE</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="physiqueNote">These resources cover physics courses, summaries, and exercises focused on mechanics including kinematics, dynamics, and energy.</span>
+      </div>
+    </section>
+
+    <section id="electricite">
+      <h2><i class="fa fa-bolt"></i> <span data-i18n="electricite">ÉLECTRICITÉ</span></h2>
+      <ul>
+        <li>
+          <a href="ELECTRIQUE/Chapitre 1 Partie 1.pdf" target="_blank">
+            <span class="chapter-badge">CH1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="electrostaticsPart1">ÉLECTROSTATIQUE (PARTIE 1)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Chapitre 1 partie 2.pdf" target="_blank">
+            <span class="chapter-badge">CH1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="electrostaticsPart2">ÉLECTROSTATIQUE (PARTIE 2)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Electrostatique-Partie 3.pdf" target="_blank">
+            <span class="chapter-badge">CH1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="electrostaticsPart3">ÉLECTROSTATIQUE (PARTIE 3)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Electrostatique-Partie 4.pdf" target="_blank">
+            <span class="chapter-badge">CH1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="electrostaticsPart4">ÉLECTROSTATIQUE (PARTIE 4)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Séries 1 & 2 & 3 PHYS2 2019-2020.pdf" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="series123">SÉRIE TD's 1 & 2 & 3</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Rappel-Electrostatique.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="electrostaticsReview">RAPPELS ÉLECTROSTATIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Chapitre 3 - Réseaux électriques.PDF" target="_blank">
+            <span class="chapter-badge">CH3</span>
+            <i class="fa fa-project-diagram"></i> <span class="resource-title" data-i18n="electricalNetworks">RÉSEAUX ÉLECTRIQUES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Rappels-Réseaux électriques.pdf" target="_blank">
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="electricalNetworksReview">RAPPELS RÉSEAUX ÉLECTRIQUES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Série 4-Réseaux électriques 2021.pdf" target="_blank">
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD4">SÉRIE TD4 RÉSEAUX ÉLECTRIQUES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Sujet 1.pdf" target="_blank">
+            <span class="subject-badge">S1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="subject1">SUJET 1</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Sujet 2.pdf" target="_blank">
+            <span class="subject-badge">S2</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="subject2">SUJET 2</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Sujet 3.pdf" target="_blank">
+            <span class="subject-badge">S3</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="subject3">SUJET 3</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Sujet 4.PDF" target="_blank">
+            <span class="subject-badge">S4</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="subject4">SUJET 4</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="ELECTRIQUE/Elect.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="examsWithSolutions">SUJETS AVEC SOLUTION (USTHB)</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="electriciteNote">These resources cover electrostatics, electrical networks, and exam materials with solutions.</span>
+      </div>
+    </section>
+
+    <section id="opm">
+      <h2><i class="fa fa-cogs"></i> OPM</h2>
+      <ul>
+        <li>
+          <a href="OPM/Cours PRF Partie 1.pdf" target="_blank">
+            <span class="course-badge">C1</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="course1OPM">COURS 1 (CALCULABILITÉ DES FONCTIONS)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/Série TD1 PRF.pdf" target="_blank">
+            <span class="course-badge">TD1</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD1">SÉRIE TD 1</span>
+          </a>
+          <a href="OPM/Série TD1 PRF Corrigé.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/Série TD2 PRF.pdf" target="_blank">
+            <span class="course-badge">TD2</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD2">SÉRIE TD 2</span>
+          </a>
+          <a href="OPM/Série TD2 PRF Corrigé.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/Cours PRF Partie 2.pdf" target="_blank">
+            <span class="course-badge">C2</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="course2OPM">COURS 2 (MACHINE DE TURING)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/Série TD3 PRF.pdf" target="_blank">
+            <span class="course-badge">TD3</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD3">SÉRIE TD 3</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/Série TD4 PRF.pdf" target="_blank">
+            <span class="course-badge">TD4</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD4">SÉRIE TD 4</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/PRF.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="examsWithSolutions">SUJETS DES EXAMENS (USTHB) AVEC SOLUTIONS</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/TP's/TP1.pdf" target="_blank">
+            <span class="tp-badge">TP1</span>
+            <i class="fa fa-laptop"></i> <span class="resource-title" data-i18n="tp1">TP 1</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/TP's/TP2.pdf" target="_blank">
+            <span class="tp-badge">TP2</span>
+            <i class="fa fa-laptop"></i> <span class="resource-title" data-i18n="tp2">TP 2</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/TP's/TP3.pdf" target="_blank">
+            <span class="tp-badge">TP3</span>
+            <i class="fa fa-laptop"></i> <span class="resource-title" data-i18n="tp3">TP 3</span>
+          </a>
+          <a href="OPM/TP's/corrigé TP3.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/TP's/TP4.pdf" target="_blank">
+            <span class="tp-badge">TP4</span>
+            <i class="fa fa-laptop"></i> <span class="resource-title" data-i18n="tp4">TP 4</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="OPM/TP's/TP5.pdf" target="_blank">
+            <span class="tp-badge">TP5</span>
+            <i class="fa fa-laptop"></i> <span class="resource-title" data-i18n="tp5">TP 5</span>
+          </a>
+          <a href="OPM/TP's/corrigé TP5.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="opmNote">These resources cover computability theory, Turing machines, and practical work with solutions for OPM (Outils Pour le Mathématicien) course.</span>
+      </div>
+    </section>
+
+     <section id="stat">
+      <h2><i class="fa fa-bar-chart"></i> <span data-i18n="statistique">STATISTIQUE</span></h2>
+      <ul>
+        <li>
+          <a href="STATISTIQUE/Cours stat simple.pdf" target="_blank">
+            <span class="course-badge">C1</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="course1Stat">COURS 1 (STAT SIMPLE)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="STATISTIQUE/SERIE TD 1.pdf" target="_blank">
+            <span class="course-badge">TD1</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD1">SÉRIE TD 1</span>
+          </a>
+          <a href="STATISTIQUE/Corrigé Série TD1.docx" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="STATISTIQUE/Cours stat double.pdf" target="_blank">
+            <span class="course-badge">C2</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="course2Stat">COURS 2 (STAT DOUBLE)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="STATISTIQUE/SERIE TD 2.pdf" target="_blank">
+            <span class="course-badge">TD2</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD2">SÉRIE TD 2</span>
+          </a>
+          <a href="STATISTIQUE/Corrigé Série TD2.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="statNote">These resources cover statistics courses and exercises with solutions, including both simple and double variable statistics.</span>
+      </div>
+    </section>
+
+    <section id="proba">
+      <h2><i class="fa fa-dice"></i> <span data-i18n="probabilite">PROBABILITÉ</span></h2>
+      <ul>
+        <li>
+          <a href="PROBABILITE/Cours d'analyse combinatoire.pdf" target="_blank">
+            <span class="course-badge">C3</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="combinatorialAnalysis">COURS 3 (ANALYSE COMBINATOIRE)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="PROBABILITE/Série TD3.JPG" target="_blank">
+            <span class="course-badge">TD3</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD3">SÉRIE TD 3</span>
+          </a>
+          <a href="PROBABILITE/Corrigé de la série TD3.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="PROBABILITE/Cours de Probabilités.pdf" target="_blank">
+            <span class="course-badge">C4</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="probabilityCourse">COURS 4 (PROBABILITÉS)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="PROBABILITE/Série TD4.pdf" target="_blank">
+            <span class="course-badge">TD4</span>
+            <i class="fa fa-pencil"></i> <span class="resource-title" data-i18n="serieTD4">SÉRIE TD 4</span>
+          </a>
+          <a href="PROBABILITE/Corrigé de la série TD4.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="STATISTIQUE/Examen GP_2022.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="examSubject">SUJET D'EXAMEN</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="STATISTIQUE/Probastat.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="examsWithSolutions">SUJETS DES EXAMENS (USTHB) AVEC SOLUTIONS</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="probaNote">These resources cover probability courses, exercises, and exam materials with solutions, including combinatorial analysis and probability theory.</span>
+      </div>
+    </section>
+
+    <section id="tic">
+      <h2><i class="fa fa-laptop"></i> TIC</h2>
+      <ul>
+        <li>
+          <a href="TIC/CoursTIC2021 - Partie 1.pdf" target="_blank">
+            <span class="part-badge">P1</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="ticPart1">COURS TIC (PARTIE 1)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TIC/CoursTIC2021 - Partie 2.pdf" target="_blank">
+            <span class="part-badge">P2</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="ticPart2">COURS TIC (PARTIE 2)</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TIC/CoursTIC2021 - Partie 3.pdf" target="_blank">
+            <span class="part-badge">P3</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="ticPart3">COURS TIC (PARTIE 3)</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="ticNote">These resources cover Information and Communication Technologies (TIC) course materials divided into three parts.</span>
+      </div>
+    </section>
+
+    <section id="tce">
+      <h2><i class="fa fa-comments"></i> TCE</h2>
+      <ul>
+        <li>
+          <a href="TCE/1- TD TCE CHOIX DU MOT JUSTE.pdf" target="_blank">
+            <span class="resource-number">1</span>
+            <i class="fa fa-font"></i> <span class="resource-title" data-i18n="wordChoice">TD TCE CHOIX DU MOT JUSTE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TCE/2- Présentation du cours PRISE DE NOTES janvier 2021 en DIAPO..pdf" target="_blank">
+            <span class="resource-number">2</span>
+            <i class="fa fa-sticky-note"></i> <span class="resource-title" data-i18n="noteTaking">PRÉSENTATION DU COURS PRISE DE NOTES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TCE/3- TD la formation des mots .pdf" target="_blank">
+            <span class="resource-number">3</span>
+            <i class="fa fa-language"></i> <span class="resource-title" data-i18n="wordFormation">TD LA FORMATION DES MOTS</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TCE/4- Les confusions homonymiques EXERCICES.pdf" target="_blank">
+            <span class="resource-number">4</span>
+            <i class="fa fa-exchange"></i> <span class="resource-title" data-i18n="homonymConfusion">LES CONFUSIONS HOMONYMIQUES EXERCICES</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TCE/5- La rédaction d'une lettre.pdf" target="_blank">
+            <span class="resource-number">5</span>
+            <i class="fa fa-envelope"></i> <span class="resource-title" data-i18n="letterWriting">LA RÉDACTION D'UNE LETTRE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="TCE/6- Le curriculum vitae.pdf" target="_blank">
+            <span class="resource-number">6</span>
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="cv">LE CURRICULUM VITAE</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="tceNote">These resources cover communication techniques and professional writing skills for effective workplace communication.</span>
+      </div>
+    </section>
+
+    <section id="histoire">
+      <h2><i class="fa fa-history"></i> <span data-i18n="histoireSciences">HISTOIRE DES SCIENCES</span></h2>
+      <ul>
+        <li>
+          <a href="HISTOIRE DES SCIENCES/Histoire des Maths-cours1.doc" target="_blank">
+            <span class="part-badge">P1</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="part1">PARTIE 1</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="HISTOIRE DES SCIENCES/cours hist maths.docx" target="_blank">
+            <span class="part-badge">P2</span>
+            <i class="fa fa-book"></i> <span class="resource-title" data-i18n="part2">PARTIE 2</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="histoireNote">These resources cover the history of mathematics and scientific development, exploring the evolution of mathematical concepts and discoveries.</span>
+      </div>
+    </section>
+
+    <section id="bureautique">
+      <h2><i class="fa fa-desktop"></i> <span data-i18n="bureautique">BUREAUTIQUE</span></h2>
+      <ul>
+        <li>
+          <a href="BUREAUTIQUE/TP1 EXCEL.pdf" target="_blank">
+            <i class="fa fa-file-excel-o"></i> <span class="resource-title" data-i18n="tp1Excel">TP1 EXCEL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/TP2 EXCEL.pdf" target="_blank">
+            <i class="fa fa-file-excel-o"></i> <span class="resource-title" data-i18n="tp2Excel">TP2 EXCEL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/TP3 EXCEL.pdf" target="_blank">
+            <i class="fa fa-file-excel-o"></i> <span class="resource-title" data-i18n="tp3Excel">TP3 EXCEL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/TP4 EXCEL.pdf" target="_blank">
+            <i class="fa fa-file-excel-o"></i> <span class="resource-title" data-i18n="tp4Excel">TP4 EXCEL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/TP5 EXCEL.pdf" target="_blank">
+            <i class="fa fa-file-excel-o"></i> <span class="resource-title" data-i18n="tp5Excel">TP5 EXCEL</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/Examen Bureautique.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="exam1">EXAMEN-1 (USTHB)</span>
+          </a>
+          <a href="BUREAUTIQUE/SOL.EXAM.pdf" class="solution-link" target="_blank">
+            <i class="fa fa-lightbulb-o"></i> <span data-i18n="solution">SOLUTION</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="BUREAUTIQUE/Examen de remplacement bureautique.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="exam2">EXAMEN-2 (USTHB)</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="bureautiqueNote">These resources cover Excel tutorials and exam materials for office productivity skills.</span>
+      </div>
+    </section>
+
+    <section id="le">
+      <h2><i class="fa fa-globe"></i> <span data-i18n="le">LE (LANGUE ÉTRANGÈRE)</span></h2>
+      <ul>
+        <li>
+          <a href="LE(LANGUE ETRANGERE/1+2-LA RECHERCHE BIBLIOGRAPHIQUE.pdf" target="_blank">
+            <i class="fa fa-search"></i> <span class="resource-title" data-i18n="bibliographicResearch">1 - LA RECHERCHE BIBLIOGRAPHIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="LE(LANGUE ETRANGERE/3-LE RESUME SCIENTIFIQUE.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="scientificSummary">2 - LE RÉSUMÉ SCIENTIFIQUE</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="LE(LANGUE ETRANGERE/4-LE COMPTE-RENDU.pdf" target="_blank">
+            <i class="fa fa-list-alt"></i> <span class="resource-title" data-i18n="report">3 - LE COMPTE-RENDU</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="LE(LANGUE ETRANGERE/5-LE RAPPORT.pdf" target="_blank">
+            <i class="fa fa-file-text"></i> <span class="resource-title" data-i18n="formalReport">4 - LE RAPPORT</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="note">
+        <i class="fa fa-info-circle"></i> <span data-i18n="leNote">These resources cover essential academic writing and research skills in a foreign language.</span>
+      </div>
+    </section>
+  </main>
+
+  <a href="#" class="back-to-top">↑</a>
+
+  <footer>
+    <p>© 2025 Mohamed Adnane — USTHB L1 MI</p>
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
